@@ -150,12 +150,14 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT', 'Bearer'),
 }
 DJOSER = {
+    'LOGIN_FIELD' : 'email',
     'USER_ID_FIELD': 'username',
     'LOGIN_FIELD' : 'username',
     'SERIALIZERS': {
         'user': 'users.serializers.CustomUserSerializer',
         'current_user': 'users.serializers.CustomUserSerializer',
         'user_create': 'users.serializers.CustomUserCreateSerializer',
+        
     }
 }
 CORS_ALLOWED_ORIGINS = [

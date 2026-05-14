@@ -8,6 +8,9 @@ class UserRoleChoices(models.TextChoices):
     USER = 'user', 'standart user'
 
 class CustomUser(AbstractUser):
+    email = models.EmailField(unique=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
     avatar = models.ImageField(upload_to='avatars/', blank=True, null = True)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     role = models.CharField(

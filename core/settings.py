@@ -180,3 +180,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 FIREBASE_KEY_PATH = os.path.join(BASE_DIR, 'firebase_key.json')
 
+if os.path.exists(FIREBASE_KEY_PATH):
+    if not firebase_admin._apps:
+        cred = credentials.Certificate(FIREBASE_KEY_PATH)
+        firebase_admin.initialize_app(cred)
+    else:
+        print("No firebase key!")

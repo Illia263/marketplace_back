@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from firebase_admin import auth
 from .models import CustomUser
+from rest_framework.views import APIView
 
 class GoogleLoginView(APIView):
     permission_classes = []

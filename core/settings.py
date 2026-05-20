@@ -154,7 +154,14 @@ SIMPLE_JWT = {
 DJOSER = {
     'LOGIN_FIELD' : 'email',
     'USER_ID_FIELD': 'username',
-    'LOGIN_FIELD' : 'username',
+    
+    'SEND_ACTIVATION_EMAIL': 'True',
+    'SEND_CONFIRMATION_EMAIL' : 'True',
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION' : 'True',
+    'PASSWORD_RESET_CONFIRM_URL' : 'password-reset/{uid}/{token}',
+    'ACTIVATION_URL' : 'activate/{uid}/{token}',
+
+    
     'SERIALIZERS': {
         'user': 'users.serializers.CustomUserSerializer',
         'current_user': 'users.serializers.CustomUserSerializer',
@@ -186,3 +193,8 @@ if os.path.exists(FIREBASE_KEY_PATH):
         firebase_admin.initialize_app(cred)
     else:
         print("No firebase key!")
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SITE_NAME = 'Marketplace'

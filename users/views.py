@@ -21,10 +21,10 @@ class GoogleLoginView(APIView):
                 user.username = email.split('@')[0]
                 user.set_unusable_password()
                 user.save()
-                refresh = RefreshToken.for_user(user)
-                return Response({
-                    'refresh' : str(refresh),
-                    'access': str(refresh.access_token),
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh' : str(refresh),
+                'access': str(refresh.access_token),
                 })
         except Exception as e:
             return Response({'errror': 'Invalid token or Firebase error'}, status=status.HTTP_400_BAD_REQUEST)

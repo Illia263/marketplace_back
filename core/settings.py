@@ -154,13 +154,13 @@ SIMPLE_JWT = {
 DJOSER = {
     'LOGIN_FIELD' : 'email',
     'USER_ID_FIELD': 'username',
-    'LOGIN_FIELD' : 'username',
+    
     
     'SEND_ACTIVATION_EMAIL': 'True',
     'SEND_CONFIRMATION_EMAIL' : 'True',
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION' : 'True',
     'PASSWORD_RESET_CONFIRM_URL' : 'password-reset/{uid}/{token}',
-    'ACTIVATION_URL' : 'activate/{uid}/{token}',
+    'ACTIVATION_URL' : 'activate/{uid}{token}',
 
     
     'SERIALIZERS': {

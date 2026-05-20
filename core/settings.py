@@ -154,6 +154,7 @@ SIMPLE_JWT = {
 DJOSER = {
     'LOGIN_FIELD' : 'email',
     'USER_ID_FIELD': 'username',
+    'LOGIN_FIELD' : 'username',
     
     'SEND_ACTIVATION_EMAIL': 'True',
     'SEND_CONFIRMATION_EMAIL' : 'True',

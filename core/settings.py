@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'djoser',
     'cloudinary_storage',
     'cloudinary',
-    'django.contrib.admin'
+    
 
 ]
 
@@ -140,7 +140,7 @@ DJOSER = {
     'SEND_CONFIRMATION_EMAIL' : 'True',
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION' : 'True',
     'PASSWORD_RESET_CONFIRM_URL' : 'password-reset/{uid}/{token}',
-    'ACTIVATION_URL' : 'activate/{uid}{token}',
+    'ACTIVATION_URL' : 'activate/{uid}/{token}',
 
     
     'SERIALIZERS': {

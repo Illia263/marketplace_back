@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from firebase_admin import auth
 from .models import CustomUser
 from rest_framework.views import APIView
 from rest_framework import generics
-from .serializers import CustomUserSerializer, CustomUserCreateSerializer
+from .serializers import CustomUserSerializer, CustomUserCreateSerializer, PublicUserSerializer, UpdateUserSerializer, AllPublicUsersSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
-
+from core.permissions import IsAdminOrReadOnly, IsOwnerOrAdmin
 class GoogleLoginView(APIView):
     permission_classes = []
 
@@ -38,16 +38,22 @@ class GoogleLoginView(APIView):
             return Response({'error': 'Invalid token or Firebase error'}, status=status.HTTP_400_BAD_REQUEST)
 
 class UserDetailView(generics.RetrieveAPIView):
-    #TODO: fix security
+    
     permission_classes = []
     authentication_classes = []
     queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = PublicUserSerializer
     lookup_field = 'uuid'
 
 class UserListView(generics.ListAPIView):
-    #TODO: fix security
-    permission_classes = []
-    authentication_classes = []
+  
+    permission_classes = [IsAdminOrReadOnly]
+  
     queryset = CustomUser.objects.all()
-    serializer_class = CustomUserSerializer
+    serializer_class = AllPublicUsersSerializer
+
+class UserUpdateView(generics.UpdateAPIView):
+    permission_classes = [IsOwnerOrAdmin]
+    queryset = CustomUser.objects.all()
+    serializer_class = UpdateUserSerializer
+    lookup_field = 'uuid'

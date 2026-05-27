@@ -1,5 +1,5 @@
 from django.urls import path, include
-from  .views import GoogleLoginView, UserDetailView, UserListView
+from  .views import GoogleLoginView, UserDetailView, UserListView, UserUpdateView
 
 
 urlpatterns = [
@@ -8,5 +8,6 @@ urlpatterns = [
     path('', include('djoser.urls.jwt')),
     path('google/', GoogleLoginView.as_view(), name='google-login'),
     path('<uuid:uuid>/', UserDetailView.as_view(), name='user-deatils' ),
+    path('<uuid:uuid>/edit/', UserUpdateView.as_view(), name='user-edit'),
     path('all_profiles/', UserListView.as_view(), name='user-list'),
 ]

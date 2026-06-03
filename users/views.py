@@ -134,7 +134,7 @@ class ResetPasswordView(APIView):
             if user.is_active is True:
                 uid = urlsafe_base64_encode(force_bytes(user.uuid))
                 token = default_token_generator.make_token(user)
-                new_password_link = f"http://localhost:3000/new_password/{uid}/{token}/"
+                new_password_link = f"http://localhost:3000/password_reset/{uid}/{token}/"
                 html_body = render_to_string('email/new.html', {'link' : new_password_link})
                 
                 send_mail(subject='new', message=new_password_link, from_email='adminmarket@gmail.com', recipient_list=[user.email], html_message=html_body)

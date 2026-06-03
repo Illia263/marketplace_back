@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'users',
     'cloudinary_storage',
     'cloudinary',
+    'games',
     
 
 ]

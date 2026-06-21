@@ -3,14 +3,17 @@ from rest_framework import generics
 from .serializers import OfferSerializer
 from .models import Offer
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 #SECURITY FIX
 class OfferListCreateView(generics.ListCreateAPIView):
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['game', 'category', 'is_active']
+    def perform_create(self, serializer):
+        serializer.save(seller=self.request.user)
 #SECURITY FIX
 class OfferDetailView(generics.RetrieveAPIView):
     permission_classes = []

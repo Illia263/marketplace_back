@@ -7,12 +7,14 @@ class OfferSerializer(serializers.ModelSerializer):
         model = Offer
         fields = ('uuid', 'title', 'description', 'price', 'stock', 'is_active', 'is_auto_delivery', 'created_at', 'custom_field', 'seller', 'game',  'category', 'secret_data')
         extra_kwargs = {'secret_data' : {'write_only' : True}}
+        read_only_fields = ('seller',)
     def to_representation(self, instance):
         representation = super().to_representation(instance)
         if instance.seller:
             representation['seller'] = {
                 'id': instance.seller.id,
                 'username' : instance.seller.username,
+                'avatar' : instance.seller.avatar 
 
             }
         if instance.game:

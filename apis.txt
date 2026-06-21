@@ -27,5 +27,5 @@
 
 # api/offers/ - all offers
 # api/offers/{uuid} - specific offer
-# api/offers/{game.slug}/{category.slug} - game by name nad category
+# api/offers/{game.slug}/{category.slug} - all offers for specific game and category
 # api/offers/{game.slug} - all offers for specific game

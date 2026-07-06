@@ -16,6 +16,15 @@ class CreateOrderView (generics.ListCreateAPIView):
                buyer.balance -= target_offer.price
                buyer.save()
                target_offer.stock -= 1
+
+               data_to_deliver = None
+               if target_offer.is_auto_delivery:
+                    data_to_deliver = target_offer.secret_data
+               serializer.save(
+                    buyer=buyer,
+                    price=target_offer.price,
+                    secret_data=data_to_deliver
+               )
           
           elif buyer.balance < target_offer.price:
                raise ValidationError({"error" : "Not enough funds"})

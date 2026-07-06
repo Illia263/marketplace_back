@@ -10,6 +10,7 @@ class OrderStatus(models.TextChoices):
     COMPLETED = 'completed', 'Completed'
     DISPUTED = 'disputed', 'Disputed'
 class Order(models.Model):
+    secret_data = models.TextField(blank=True, null=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders_as_buyer')
     offer = models.ForeignKey(Offer, on_delete=models.CASCADE, related_name='orders')
